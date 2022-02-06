@@ -44,6 +44,16 @@ window.addEventListener('DOMContentLoaded', () => {
       o: ['Sydney', 'Canberra', 'Melbourne', 'Perth'],
       a: 1,
     },
+    {
+      q: 'What are the colours of the Australian Aboriginal Flag?',
+      o: ['Black, red and yellow', 'Green, white and black', 'Blue, white and green', 'Blue, Black and green'],
+      a: 0,
+    },
+    {
+      q: 'What is the national animal of Australia?',
+      o: ['Lion', 'Horse', 'Kangaroo', 'Elephant'],
+      a: 2,
+    },
   ];
 
   // function to Display the quiz questions and answers from the object
@@ -76,14 +86,41 @@ window.addEventListener('DOMContentLoaded', () => {
 
         if (quizItem.a == i) {
           //change background color of li element here
+          document.getElementById(id = li).style.backgroundColor = "  Green";
         }
 
         if (radioElement.checked) {
           // code for task 1 goes here
+          if(quizItem.a == i) {
+            score++;
+          }
         }
       }
     });
+    alert("your score is" + score);
+    document.querySelector("#score").innerHTML = "Your Score is " + score;
   };
+
+  const resetfunction = () => {
+    window.location.reload();
+  }
+  document.querySelector('#btnSubmit').addEventListener('click', calculateScore);
+  document.querySelector('#btnReset').addEventListener('click', resetfunction);
+
+  var timeLeft = 30;
+    var elem = document.getElementById('time');
+    
+    var timerId = setInterval(countdown, 1000);
+    
+    function countdown() {
+      if (timeLeft == -1) {
+        clearTimeout(timerId);
+        calculateScore();
+      } else {
+        elem.innerHTML = timeLeft + ' seconds remaining';
+        timeLeft--;
+      }
+    }
 
   // call the displayQuiz function
   displayQuiz();
